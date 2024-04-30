@@ -31,7 +31,7 @@ void Mergesort(int* A,int l,int r){
 }
 
 int main(){
-    int arrayteste[] = {8,3,2,9,7,1,5,4};
+    int arrayteste[] = {1,3,2,1,5};
     int lenght = sizeof(arrayteste)/sizeof(int);
     Mergesort(arrayteste,0,lenght-1);
     for (int i = 0; i < lenght; i++){
@@ -39,3 +39,5 @@ int main(){
     }
     return 0;
 }
+
+//gcc mergesort.c -o mergesort.exe ; ./mergesort.exe
