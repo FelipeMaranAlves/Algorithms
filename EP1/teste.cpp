@@ -18,9 +18,14 @@ Candidato create(string nome,int nota,int idade){
 }
 
 int main(){
-    Candidato banana = create("joaozin",0,6);
-    cout << sizeof(int);
+    Candidato* lista;
+    Candidato candidato1 = create("joaozin",0,6);
+    Candidato candidato2 = create("joaozin",10,16);
+    // lista[0] = candidato
+    // lista[1] = candidato2;
+    cout << sizeof(string);
+    cout << "banana";
     return 0;
 }
 
-// gpp teste.cpp -o teste.exe ; ./teste.exe
+// g++ teste.cpp -o teste.exe ; ./teste.exe
