@@ -18,13 +18,14 @@ Candidato create(string nome,int nota,int idade){
 }
 
 int main(){
-    Candidato* lista;
-    Candidato candidato1 = create("joaozin",0,6);
-    Candidato candidato2 = create("joaozin",10,16);
-    // lista[0] = candidato
-    // lista[1] = candidato2;
-    cout << sizeof(string);
-    cout << "banana";
+    Candidato lista[2];
+    Candidato candidato1 = create("Aqueriano",0,6);
+    Candidato candidato2 = create("Nato",10,16);
+    lista[0] = candidato1;
+    lista[1] = candidato2;
+    for (int i = 0;i<2;i++){
+        cout << lista[i].nome;
+    }
     return 0;
 }
 

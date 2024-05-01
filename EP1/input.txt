@@ -1,0 +1,7 @@
+1
+5 3
+adriano 90 18
+juan 50 20
+francielle 98 23
+arnaldo 98 23
+lina 90 20
