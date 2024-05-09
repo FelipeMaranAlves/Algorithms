@@ -78,6 +78,7 @@ int main(){
                 pairs++;
             };
         }
+        
     }
 
     printf("%d", pairs); // saida
