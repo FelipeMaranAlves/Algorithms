@@ -17,60 +17,67 @@ P->lista = (int *) malloc(tam * sizeof(int));
 return P;
 }
 
-void inserir(Listarray lista,int it){
-    if (lista.tamanho >= lista.maximo)
+void inserir(Listarray *lista,int it){
+    if (lista->tamanho >= lista->maximo)
     {
         printf("opa meu patrao, nao da pra inserir cm ela cheia"); // n sei fazer dar erro
     } else {
-        int i = lista.tamanho;
-        while (i > lista.posicao)
+        int i = lista->tamanho;
+        while (i > lista->posicao)
         {
-            lista.lista[i] = lista.lista[i-1]; // obs "lista" eh o objeto abstrato que contem a lista em si e algumas informacoes sobre ela, por isso o lista.lista
+            lista->lista[i] = lista->lista[i-1]; // obs "lista" eh o objeto abstrato que contem a lista em si e algumas informacoes sobre ela, por isso o lista.lista
             i--;
         }
     }
-    lista.lista[lista.posicao] = it;
-    lista.tamanho++;
+    lista->lista[lista->posicao] = it;
+    lista->tamanho++;
 }
 
-void moverinicio(Listarray lista){
-    lista.posicao = 0;
+void moverinicio(Listarray *lista){
+    lista->posicao = 0;
 }
 
-void moverfim(Listarray lista){
-    lista.posicao = lista.tamanho;
+void moverfim(Listarray *lista){
+    lista->posicao = lista->tamanho;
 }
 
-void anterior(Listarray lista){
-    if (lista.posicao != 0)
+void anterior(Listarray *lista){
+    if (lista->posicao != 0)
     {
-        lista.posicao--;
+        lista->posicao--;
     }
 }
 
-void proximo(Listarray lista){
-    if (lista.posicao < lista.tamanho)
+void proximo(Listarray *lista){
+    if (lista->posicao < lista->tamanho)
     {
-        lista.posicao++;
+        lista->posicao++;
     }
 }
 
-int remover(Listarray lista){
-    if (lista.posicao < 0 || lista.posicao >= lista.tamanho)
+int remover(Listarray *lista){
+    if (lista->posicao < 0 || lista->posicao >= lista->tamanho)
     {
-        return NULL;
+        return 0;
     }
-    int it = lista.lista[lista.posicao];
-    int i = lista.posicao;
-    while (i < lista.tamanho-1)
+    int it = lista->lista[lista->posicao];
+    int i = lista->posicao;
+    while (i < lista->tamanho-1)
     {
-        lista.lista[i] = lista.lista[i+1];
+        lista->lista[i] = lista->lista[i+1];
         i++;
     }
-    lista.tamanho--;
+    lista->tamanho--;
     return it;
 }
 
 int main(){
+    Listarray* lista1 = criador(5);
+    inserir(lista1, 7);
+    inserir(lista1, 6);
+    printf("%d\n",lista1->lista[0]);
+    printf("%d\n",lista1->lista[1]);
+    printf("%d\n",lista1->tamanho);
+    printf("%d\n",lista1->maximo);
     return 0;
 }
