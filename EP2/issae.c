@@ -59,32 +59,32 @@ Fila* sai_fila(Fila *q){
 //fazer o sizeof de uma fila
 //percorrer uma fila e printar seus elementos
 int main(){
-    Fila* questoes = criar_fila();
-    char entrada[5];
-    while (entrada != "end")
-    {
-        int resolvidas;
-        scanf(" %s",entrada);
-        if (entrada == "add"){
-            int num;
+    // Fila* questoes = criar_fila();
+    // char entrada[5];
+    // while (entrada != "end")
+    // {
+    //     int resolvidas;
+    //     scanf(" %s",entrada);
+    //     if (entrada == "add"){
+    //         int num;
             
-            scanf("%d",&num);
-            questoes = entra_fila(questoes,num);
-        } else if (entrada == "solve"){
-            questoes = sai_fila(questoes);
-            resolvidas++;
-        } else if (entrada == "print"){
-            Fila *atual = questoes;
-            Link *cara = atual->head;
-            while (cara->next != NULL)
-            {
-             printf("%d ",cara->next->valor);
-             cara = cara->next;
-            }
-            printf("\n");
-        } else if (entrada == "stats"){
-            printf("%d %d\n",resolvidas,questoes->tamanho);
-        }
-    }
+    //         scanf("%d",&num);
+    //         questoes = entra_fila(questoes,num);
+    //     } else if (entrada == "solve"){
+    //         questoes = sai_fila(questoes);
+    //         resolvidas++;
+    //     } else if (entrada == "print"){
+    //         Fila *atual = questoes;
+    //         Link *cara = atual->head;
+    //         while (cara->next != NULL)
+    //         {
+    //          printf("%d ",cara->next->valor);
+    //          cara = cara->next;
+    //         }
+    //         printf("\n");
+    //     } else if (entrada == "stats"){
+    //         printf("%d %d\n",resolvidas,questoes->tamanho);
+    //     }
+    // }
     return 0;
 }
