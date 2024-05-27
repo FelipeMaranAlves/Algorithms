@@ -59,32 +59,31 @@ Fila* sai_fila(Fila *q){
 //fazer o sizeof de uma fila
 //percorrer uma fila e printar seus elementos
 int main(){
-    // Fila* questoes = criar_fila();
-    // char entrada[5];
-    // while (entrada != "end")
-    // {
-    //     int resolvidas;
-    //     scanf(" %s",entrada);
-    //     if (entrada == "add"){
-    //         int num;
+    Fila* questoes = criar_fila();
+    char entrada[5];
+    while (entrada[0] != "e" && entrada[1] != "n" && entrada[2] != "d")//(entrada != "end")
+    {
+        int resolvidas;
+        scanf(" %s",entrada);
+        if (entrada[0] == "a" && entrada[1] == "d" && entrada[2] == "d"){//(entrada == "add")
+            int num;
             
-    //         scanf("%d",&num);
-    //         questoes = entra_fila(questoes,num);
-    //     } else if (entrada == "solve"){
-    //         questoes = sai_fila(questoes);
-    //         resolvidas++;
-    //     } else if (entrada == "print"){
-    //         Fila *atual = questoes;
-    //         Link *cara = atual->head;
-    //         while (cara->next != NULL)
-    //         {
-    //          printf("%d ",cara->next->valor);
-    //          cara = cara->next;
-    //         }
-    //         printf("\n");
-    //     } else if (entrada == "stats"){
-    //         printf("%d %d\n",resolvidas,questoes->tamanho);
-    //     }
-    // }
+            scanf("%d",&num);
+            questoes = entra_fila(questoes,num);
+        } else if (entrada[0] == "s" && entrada[1] == "o" && entrada[2] == "l" && entrada[3] == "v" && entrada[4] == "e"){// (entrada == "solve")
+            questoes = sai_fila(questoes);
+            resolvidas++;
+        } else if (entrada[0] == "p" && entrada[1] == "r" && entrada[2] == "i" && entrada[3] == "n" && entrada[4] == "t"){//(entrada == "print")
+            Link *cara = questoes->head;
+            while (cara->next != NULL)
+            {
+             printf("%d ",cara->next->valor);
+             cara = cara->next;
+            }
+            printf("\n");
+        } else if (entrada[0] == "s" && entrada[1] == "t" && entrada[2] == "a" && entrada[3] == "t" && entrada[4] == "s"){ //(entrada == "stats")
+            printf("%d %d\n",resolvidas,questoes->tamanho);
+        }
+    }
     return 0;
 }

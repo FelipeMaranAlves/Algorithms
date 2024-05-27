@@ -70,7 +70,14 @@ int main(){
     free(link3);
 
     Linkedlist *lista1 = create_list();
-
+    // add_element_to_list(lista1, 5);
+    printf("%p\n",lista1->head->next);
+    printf("%p",lista1->tail->next);
+    add_element_to_list(lista1,5);
+    printf("%p\n",lista1->head->next);
+    printf("%p",lista1->tail->next);
+    printf("%p\n",lista1->head->valor);
+    printf("%p",lista1->tail->valor);
 
     return 0;
 }
