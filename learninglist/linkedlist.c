@@ -20,16 +20,6 @@ Link* create_link(int element,Link* nextt){
     return n;
 }
 
-Link* create_link_with_no_element(Link *nextt){
-    Link* n = (Link*)malloc(sizeof(Link));
-    if (n == NULL) {
-        printf("Erro ao alocar memória.\n");
-        exit(1);
-    }
-    n->next = nextt;
-    return n;
-}
-
 typedef struct linkedlist
 {
     Link *head;
@@ -40,7 +30,16 @@ typedef struct linkedlist
 
 Linkedlist* create_list(){
     Linkedlist* l = (Linkedlist*)malloc(sizeof(Linkedlist));
-    l->head = l->tail = create_link_with_no_element(NULL);
+    l->head = l->tail = l->current = create_link(-69,NULL);
+    l->count = 0;
+}
+
+void movecursornext(Linkedlist* lista){
+    if (lista->current->next != NULL)
+    {
+        lista->current = lista->current->next; 
+    }
+    
 }
 
 void add_element_to_list(Linkedlist* lista,int value){
@@ -52,32 +51,49 @@ void add_element_to_list(Linkedlist* lista,int value){
     lista->count++;
 }
 
-int main(){
-    Link* head = create_link_with_no_element(NULL);
-    Link* link1 = create_link(1,head);
-    Link* link2 = create_link(2,link1);
-    Link* link3 = create_link(3,link2);
-    //criei uma lista manualmente com os link
-    Link* current = link3;
-    while (current->next != NULL)
+void print_list_elements(Linkedlist* lista){
+    Link  * temporario = lista->head->next;
+    while (temporario->next != NULL)
     {
-        printf("esse eh o link com valor: %d\n", current->valor);
-        current = current->next;
+        printf("%d ",temporario->valor);
+        temporario->next = temporario->next->next;
     }
-    free(head);
-    free(link1);
-    free(link2);
-    free(link3);
+    printf("\n");
+}
+
+int main(){
+    // Link* head = create_link_with_no_element(NULL);
+    // Link* link1 = create_link(1,head);
+    // Link* link2 = create_link(2,link1);
+    // Link* link3 = create_link(3,link2);
+    // //criei uma lista manualmente com os link
+    // Link* current = link3;
+    // while (current->next != NULL)
+    // {
+    //     printf("esse eh o link com valor: %d\n", current->valor);
+    //     current = current->next;
+    // }
+    // free(head);
+    // free(link1);
+    // free(link2);
+    // free(link3);
 
     Linkedlist *lista1 = create_list();
     // add_element_to_list(lista1, 5);
-    printf("%p\n",lista1->head->next);
-    printf("%p",lista1->tail->next);
+
     add_element_to_list(lista1,5);
-    printf("%p\n",lista1->head->next);
-    printf("%p",lista1->tail->next);
-    printf("%p\n",lista1->head->valor);
-    printf("%p",lista1->tail->valor);
+    movecursornext(lista1);
+    add_element_to_list(lista1,7);
+    movecursornext(lista1);
+    add_element_to_list(lista1, 3);
+    movecursornext(lista1);
+    // printf("%d\n",lista1->head->valor);
+    printf("%d\n",lista1->head->next->valor);
+    printf("%d\n",lista1->head->next->next->valor);
+    printf("%d\n",lista1->head->next->next->next->valor);
+    printf("tail %d\n",lista1->tail->valor);
+    print_list_elements(lista1);
+
 
     return 0;
 }
