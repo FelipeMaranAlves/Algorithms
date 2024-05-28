@@ -3,13 +3,13 @@
 
 typedef struct Link
 {
-    int valor;
+    char valor;
     struct Link *next;
 } Link;
 
 //to passando o valor do link que eu to criando e o ponteiro de quem esse link vai se ligar
 //quando eu quiser criar o primeiro eu passo nextvalue null e qualquer coisa em it
-Link* create_link(int element,Link* nextt){
+Link* create_link(char element,Link* nextt){
     Link* n = (Link*)malloc(sizeof(Link));
     if (n == NULL) {
         printf("Erro ao alocar memória.\n");
@@ -30,7 +30,7 @@ typedef struct linkedlist
 
 Linkedlist* create_list(){
     Linkedlist* l = (Linkedlist*)malloc(sizeof(Linkedlist));
-    l->head = l->tail = l->current = create_link(-69,NULL);
+    l->head = l->tail = l->current = create_link(0,NULL);
     l->count = 0;
     return l;
 }
@@ -63,7 +63,7 @@ void movecursorprevius(Linkedlist* lista){ // acho que to fazendo bem ineficient
     }
 }
 
-void add_element_to_list(Linkedlist* lista,int value){
+void add_element_to_list(Linkedlist* lista,char value){
     lista->current->next = create_link(value, lista->current->next);
     if (lista->tail == lista->current)
     {
@@ -72,12 +72,12 @@ void add_element_to_list(Linkedlist* lista,int value){
     lista->count++;
 }
 
-int remove_element(Linkedlist* lista){
+char remove_element(Linkedlist* lista){
     if (lista->current->next == NULL)
     {
         return 0;
     }
-    int it = lista->current->next->valor;
+    char it = lista->current->next->valor;
     if (lista->tail == lista->current->next)
     {
         lista->tail = lista->current;
@@ -91,33 +91,37 @@ void print_list_elements(Linkedlist* lista){
     Link  * temporario = lista->head->next;
     while (temporario != NULL)
     {
-        printf("%d ",temporario->valor);
+        printf("%c",temporario->valor);
         temporario = temporario->next;
     }
     printf("\n");
 }
 
 int main(){
-    Linkedlist *lista1 = create_list();
-    add_element_to_list(lista1,1);
-    movecursornext(lista1);
-    add_element_to_list(lista1,2);
-    movecursornext(lista1);
-    add_element_to_list(lista1,3);
-    movecursornext(lista1);
-    add_element_to_list(lista1,4);
-    movecursornext(lista1);
-    add_element_to_list(lista1,5);
-    movecursornext(lista1);
-    add_element_to_list(lista1,6);
-    movecursornext(lista1);
-    add_element_to_list(lista1,7);
-    print_list_elements(lista1);
-    movecursorprevius(lista1);
-    movecursorprevius(lista1);
-    remove_element(lista1);
-    print_list_elements(lista1);
+    char entrada[100001];
+    while (scanf(" %s", entrada) != EOF)
+    {
+        Linkedlist* list = create_list();
+        for (int i = 0; entrada[i] != '\0' ; i++)
+        {
+            char atual = entrada[i];
+            if (atual == '[')
+            {
+                move_cursor_start(list);
+            } else if (atual == ']'){
+                move_cursor_tail(list);
+            } else{
+                add_element_to_list(list,atual);
+                movecursornext(list);
+            }
+        }
+        print_list_elements(list);
+        free(list);
+    }
     
+
+
     return 0;
 }
-//gcc linkedlist.c -o linkedlist.exe ; .\linkedlist.exe
+
+//gcc A2.c -o A2.exe ; .\A2.exe
