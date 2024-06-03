@@ -10,9 +10,8 @@ typedef struct Dictionary
     struct Linkedlist** hash_table;
 } Dictionary;
 
-//devo passar o 15 aqui,
+//devo passar o 10 aqui,
 Dictionary* create_dictionary(int size){
-    // Hash_function_module(value, size)
     Dictionary* d = (Dictionary*)malloc(sizeof(Linkedlist));
     d->m = size;
     d->count = 0;
@@ -21,7 +20,6 @@ Dictionary* create_dictionary(int size){
     {
         d->hash_table[i] = create_list();
     }
-    //d->h = h?? n sei botar a função de hash dentro do meu struct
     return d;
 }
 
