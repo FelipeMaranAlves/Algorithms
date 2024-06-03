@@ -12,7 +12,7 @@ typedef struct Link
     struct Link *next;
 } Link;
 
-typedef struct linkedlist
+typedef struct Linkedlist
 {
     Link *head;
     Link *tail;
