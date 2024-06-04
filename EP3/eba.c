@@ -3,6 +3,7 @@
 #include <math.h>
 #include <string.h>
 
+//desisti, n faltava mto mas cansei, apra arvores binárias!!
 //A política de resolução de colisões é baseada em pseudo-random probing, conforme p(k,i) = perm[i-1], onde perm é o array de permutações.
 
 int hash_function(int key, int mod) {
@@ -20,41 +21,56 @@ typedef struct elemento
 
 typedef struct Dic
 {
+    int* permutation_array;
     int m;
     int count;
     elemento* hash_table;
 }Dic;
 
-Dic* initializ(int m){
-    Dic* dic = (Dic*)malloc(Dic);
+Dic* initialize(int m,int* permutation_arrayy){
+    Dic* dic = (Dic*)malloc(sizeof(Dic));
+    dic->permutation_array = permutation_arrayy;
     dic->m = m;
     dic->count = 0;
     dic->hash_table = (elemento*)malloc(m*sizeof(elemento));
     for (int i = 0; i < m; i++)
     {
-        dic->hash_table->ocupied = 0;
+        dic->hash_table[i].ocupied = 0;
+        dic->hash_table[i].value = -69;
     }
     return dic;
 }
 
-int probing(int element, int tries){
-
-
-}
-
 void insert_in_dic(Dic* dictionary, int element){
-    if (dictionary->hash_table[hash_function(element,dictionary->m)]->ocupied == 0)
+    int index = hash_function(element,dictionary->m);
+    int tries = 0;
+    elemento* atual = dictionary->hash_table[index];  
+    if (dictionary->count < dictionary->m)
     {
-        dictionary->hash_table[hash_function(element,dictionary->m)]->value = element;
-        dictionary->hash_table[hash_function(element,dictionary->m)]->key = hash_function(element,dictionary->m);
-        dictionary->hash_table[hash_function(element,dictionary->m)]->ocupied = 1;
-    } else if (dictionary->hash_table[hash_function(element,dictionary->m)]->ocupied == 1){
-        int temp_new_key;
-        temp_new_key = 
+        while (atual->ocupied == 0 && atual->value != element)
+        {
+            int probe = dictionary->permutation_array[tries % (dictionary->m-1)];
+            index = (index + probe) % dictionary->m;
+            tries++;
+        }
+        dictionary->hash_table[index] = element;
     }
     
-    dictionary->hash_table[]; // isso nas primeira inserções
-    hash_function(element,dictionary->m)
+    
+    
+    
+    // if (dictionary->hash_table[hash_function(element,dictionary->m)]->ocupied == 0)
+    // {
+    //     dictionary->hash_table[hash_function(element,dictionary->m)]->value = element;
+    //     dictionary->hash_table[hash_function(element,dictionary->m)]->key = hash_function(element,dictionary->m);
+    //     dictionary->hash_table[hash_function(element,dictionary->m)]->ocupied = 1;
+    // } else if (dictionary->hash_table[hash_function(element,dictionary->m)]->ocupied == 1){
+    //     int temp_new_key;
+    //     temp_new_key = 
+    // }
+    
+    // dictionary->hash_table[]; // isso nas primeira inserções
+    // hash_function(element,dictionary->m);
 }
 
 
@@ -73,6 +89,7 @@ int main(){ //add -10 -5
         scanf("%d",&temp);
         perm[i] = temp;
     }
+    Dic* banana = initialize(m,perm);
     int n_comandos;
     scanf("%d",&n_comandos);
     for (int i = 0; i < n_comandos; i++)
@@ -87,7 +104,12 @@ int main(){ //add -10 -5
             scanf("%d",&valor1);
         }
     }
+    for (int i = 0; i < m; i++)
+    {
+        printf("%d %d ", banana->hash_table[i].value, banana->hash_table[i].ocupied);
+    }
     return 0;
+    
 }
     // for (int i = 0; i < m-1; i++)
     // {
