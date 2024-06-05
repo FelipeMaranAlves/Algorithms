@@ -1,0 +1,32 @@
+         A
+        / \
+        B  C
+       /\  /\
+       D E F G
+
+possíveis informações de um nó/vértice a serem implementados
+é pai   -> subtree
+é filho -> folha
+level   ->por extansão irmãos/primos
+depth   ->depth of a vertex v is the length of the simple path from the root to v
+height is the longest path from the root to a leaf
+
+Ordered Trees An ordered tree is a rooted tree in which all the children of each
+vertex are ordered.
+
+A binary tree can be defined as an ordered tree in which every vertex has
+no more than two children and each child is designated as either a left child or a
+right child of its parent -> recursão
+
+para BT
+filho -> direito/esquerdo
+
+nó / vértice para uma BT
+struct Node
+    E value
+    struct node* right child (will be the one whose value is greater than this node's value)
+    struct node* left child  (will be the one whose value is smaller than this node's value)
+
+⌊log2 n⌋ ≤ h ≤ n − 1.
+
+duvida -> first child–next sibling representation
