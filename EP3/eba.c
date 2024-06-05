@@ -41,23 +41,21 @@ Dic* initialize(int m,int* permutation_arrayy){
     return dic;
 }
 
-void insert_in_dic(Dic* dictionary, int element){
+void insert_in_dic(Dic* dictionary, int element
+){
     int index = hash_function(element,dictionary->m);
     int tries = 0;
-    elemento* atual = dictionary->hash_table[index];  
+    elemento atual = dictionary->hash_table[index];  
     if (dictionary->count < dictionary->m)
     {
-        while (atual->ocupied == 0 && atual->value != element)
+        while (atual.ocupied == 0 && atual.value != element)
         {
             int probe = dictionary->permutation_array[tries % (dictionary->m-1)];
             index = (index + probe) % dictionary->m;
             tries++;
         }
-        dictionary->hash_table[index] = element;
+        dictionary->hash_table[index].value = element;
     }
-    
-    
-    
     
     // if (dictionary->hash_table[hash_function(element,dictionary->m)]->ocupied == 0)
     // {
@@ -106,7 +104,7 @@ int main(){ //add -10 -5
     }
     for (int i = 0; i < m; i++)
     {
-        printf("%d %d ", banana->hash_table[i].value, banana->hash_table[i].ocupied);
+        printf("%d ", banana->hash_table[i].value);
     }
     return 0;
     
