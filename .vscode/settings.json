@@ -3,7 +3,15 @@
         "iostream": "cpp",
         "ostream": "cpp",
         "algorithm": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "string": "c",
+        "optional": "c",
+        "system_error": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
