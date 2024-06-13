@@ -87,8 +87,8 @@ void insert_dic_closed_string(Dic_closed_stirng* dictionary, char* key, int valu
                 dictionary->hash[current_index].value = current_index;
                 dictionary->hash[current_index].occupied_flag = 1;
                 dictionary->n_elements++;
+                return;
             }
-            return;
         }
     }
     return;
@@ -121,13 +121,17 @@ int main(){
             char action[4];
             char key_word[16];
             scanf("%s",entrada);
-            sscanf(entrada, "%3s:%15s", action, key_word); // ta gerando as palavras certinho
-            if (strcmp(action,"ADD") == 0) // ta entrando aqui certinho
+            sscanf(entrada, "%3s:%15s", action, key_word);
+            if ((sscanf(entrada, "%3s:%15s", action, key_word) == 2))
+            {
+                if (strcmp(action,"ADD") == 0)
             {
                 insert_dic_closed_string(dictionary,key_word,0);
-            } else if(strcmp(action,"DEL") == 0){ // ta entrando aqui certinho
+            } else if(strcmp(action,"DEL") == 0){
                 delete_dic(dictionary,key_word);
             }
+            }
+            
         }
         printf("%d\n",dictionary->n_elements);
         for (int i2 = 0; i2 < dictionary->m; i2++)
@@ -141,7 +145,7 @@ int main(){
         {
             dictionary->hash[i2].occupied_flag = 0;
         }
-        
+        dictionary->n_elements = 0;
     }
     free(dictionary->hash); // ficou faltando dar free nas keys mas mim cansado
     free(dictionary);
