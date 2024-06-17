@@ -108,23 +108,18 @@ void postorder(Node* rt){
 
 int main(){
     Bst* tree = create_BST();
-    int n, p;
-    scanf("%d",&n);
-    for (int i = 0; i < n; i++)
+    int var;
+    for (int i = 0; i < 9; i++)
     {
-        scanf("%d",&p);
-        insert_BST(tree,p,0);
+        scanf("%d",&var);
+        insert_BST(tree,var,0);
     }
-    
-    printf("Pre order :");
     preorder(tree->root);
     printf("\n");
-    printf("In order  :");
     inorder(tree->root);
     printf("\n");
-    printf("Post order:");
     postorder(tree->root);
     return 0;
 }
 
-//gcc B.c -o B.exe ; ./B.exe
+//gcc asd.c -o asd.exe ; ./asd.exe
