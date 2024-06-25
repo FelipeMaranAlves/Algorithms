@@ -9,7 +9,7 @@ enum booleano{
 
 //H has n+1 size H[0] is allways empty
 //int n = (sizeof(H)/sizeof(int)) - 1;
-void HeapBottomUP(int H[],int n){
+void HeapifyBottomUP(int H[],int n){
     for (int i = n/2; i > 0; i--)
     {
         int k = i;
@@ -38,7 +38,6 @@ void HeapBottomUP(int H[],int n){
 }
 
 
-
 int main(){
     int Heap[8] = {-1,2,9,10,6,5,8,7};
     int n = 8;
@@ -46,7 +45,7 @@ int main(){
     {
         printf("%d ",Heap[i]);
     }
-    HeapBottomUP(Heap,n);
+    HeapifyBottomUP(Heap,n-1);
     printf("\n");
     for (int i = 1; i < n; i++)
     {
