@@ -178,7 +178,6 @@ void preorderClear(Node* rt ){
 }
 
 int main(){
-    Bst* banana =  create_BST();
     return 0;
 }
 

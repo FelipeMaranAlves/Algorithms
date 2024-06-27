@@ -6,9 +6,29 @@ enum booleano{
     True
 };
 
+typedef struct Heapp
+{
+    int size;
+    int* heap;
+}Heapp;
+
+//heap already recives an array with size+1, wich the first element is not going to be used
+Heapp* create_heap(int* array,int size){
+    Heapp* new_heap = (Heapp*) malloc(sizeof(Heapp));
+    new_heap->size = size;
+    new_heap->heap = (int*)malloc(sizeof(int)*(size+1)); 
+    for (int i = 1; i < size; i++)
+    {
+        new_heap->heap[i] = array[i];
+    }
+    return new_heap;
+}
+
 //H has n+1 size H[0] is allways empty
 //int n = (sizeof(H)/sizeof(int)) - 1;
-void Heapify_BottomUP_Min(int H[],int n){
+void Heapify_BottomUP_Min(Heapp* Heap){
+    int* H = Heap->heap;
+    int n = Heap->size;
     for (int i = n/2; i > 0; i--)
     {
         int k = i;
@@ -35,15 +55,20 @@ void Heapify_BottomUP_Min(int H[],int n){
     }
 }
 
-//returns the new size
-int remove_and_heapify_min(int H[],int n){
+int remove_and_heapify_min(Heapp* Heap){
+    int* H = Heap->heap;
+    int n = Heap->size;
+    int removed = H[1];
     H[1] = H[n-1];
-    Heapify_BottomUP_Min(H,n-1);
-    return n-1;
+    Heap->size--;
+    Heapify_BottomUP_Min(Heap);
+    return removed;
 }
 
-void printheap(int H[],int n){
-        for (int i = 1; i < n; i++)
+void printheap(Heapp* Heap){
+    int* H = Heap->heap;
+    int n = Heap->size;
+    for (int i = 1; i < n; i++)
     {
         printf("%d ",H[i]);
     }
@@ -52,16 +77,35 @@ void printheap(int H[],int n){
 
 
 int main(){
-    // int Heap[8] = {-1,2,9,10,6,5,8,7};
-    // int n = 8;
-    int Heap[5] = {-1,10,40,50,5};
-    int n = 5;
-    printheap(Heap,n);
-    Heapify_BottomUP_Min(Heap,n-1);
-    printheap(Heap,n);
-    n = remove_and_heapify_min(Heap,n);
-    printheap(Heap,n);
+    int size;
+    int temp = 0;
+    int sum = 0;
+    scanf("%d",&size);
+    int bolle = 1;
+    while (bolle) // condicional do loop
+    {
+        int array[size+1];
+        array[0] = -1;
+        for (int i = 1; i < size +1; i++) // erro de range
+        {
+            scanf("%d",&array[i]);
+        }
+        Heapp* banana = create_heap(array,size +1); //peguei o input e botei no struct certin
+        printheap(banana);
+        while (banana->size > 2)
+        {
+            temp += remove_and_heapify_min(banana);
+            banana->heap[1] = temp;
+            sum += temp;
+            Heapify_BottomUP_Min(banana);
+        }
+        printf("%d\n",sum);
+        scanf("%d",&size); // n mecher
+        if(size == 0){
+            bolle = 0;
+        }
+    }
     return 0;
 }
 
-//gcc bottomup.c -o bottomup.exe ; ./bottomup.exe
+//gcc B.c -o B.exe;Get-Content inputB.txt | ./B.exe
