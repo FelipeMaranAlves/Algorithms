@@ -20,7 +20,12 @@
         "limits": "c",
         "numeric": "c",
         "stdio.h": "c",
-        "math.h": "c"
+        "math.h": "c",
+        "charconv": "cpp",
+        "chrono": "cpp",
+        "expected": "cpp",
+        "format": "cpp",
+        "ratio": "cpp"
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "enabled"
 }

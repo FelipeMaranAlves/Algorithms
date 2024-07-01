@@ -1,0 +1,16 @@
+Learning about heaps
+partially ordered data structure that is especially suitable for implementing priority queues
+finding an item with the highest (i.e., largest) priority
+deleting an item with the highest priority
+adding a new item to the multiset
+
+
+1 2 2 2
+\3\\4
+\\7
+14
+3 2 2
+5 2
+7
+
+\\15
