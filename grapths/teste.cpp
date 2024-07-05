@@ -49,10 +49,11 @@ public:
     }
     ~MatrixGraph(){
         free(Mark);
-        for (int i = (numVertex-1); i >= 0; i--)
+        for (int i = (numVertex); i >= 0; i--)
         {
             free(matrix[i]);
         }
+        free(matrix);
         //falta fazer o free da matrix mas n to sabendo como deixar o n aqui dentro
     }
 
@@ -66,7 +67,7 @@ public:
     //return first neightbor of "v"
     //Implicit assumption: 0 denotes the absence of an edge between two nodes
     int first(int v){
-        for (int i = 0; i < (numVertex-1); i++)
+        for (int i = 0; i < (numVertex); i++)
         {
             if (matrix[v][i] != 0)
             {
@@ -78,7 +79,7 @@ public:
     //Return v’s next neighbor after w
     //Implicit assumption: 0 denotes the absence of an edge between two nodes
     int next(int v, int w){
-        for (int i = (w+1); i < (numVertex-1) ; i++)
+        for (int i = (w+1); i < (numVertex) ; i++)
         {
             if (matrix[v][i] != 0)
             {
@@ -126,11 +127,11 @@ public:
 
 
     void graphTraverseDFS(){
-        for (int v = 0; v < (numVertex-1); v++)
+        for (int v = 0; v < (numVertex); v++)
         {
             Mark[v] = UNVISITED;
         }
-        for (int v = 0; v < (numVertex-1); v++)
+        for (int v = 0; v < (numVertex); v++)
         {
             if (Mark[v] == UNVISITED)
             {
@@ -165,18 +166,21 @@ public:
         
     }
 
-    void graphTraverseBFS(){
-        for (int v = 0; v < (numVertex-1); v++)
+    int graphTraverseBFS(){ //modified to return the number of times it had to run the bsf wich should be the number of maximal subgraphs
+        for (int v = 0; v < (numVertex); v++)
         {
             Mark[v] =UNVISITED;
         }
-        for (int v = 0; v < (numVertex-1); v++)
+        int count = 0;
+        for (int v = 0; v < (numVertex); v++)
         {
             if (Mark[v] == UNVISITED)
             {
                 BSF(v);
+                count++;
             }
         }
+        return count;
     }
 
     void toposort(int v,stack<int> s){
@@ -195,26 +199,26 @@ public:
 
 };
 
-class jeitodoprof
-{
-private:
-    /* data */
-public:
-    jeitodoprof(/* args */);
-    ~jeitodoprof();
-};
-
-jeitodoprof::jeitodoprof(/* args */)
-{
-}
-
-jeitodoprof::~jeitodoprof()
-{
-}
 
 
 int main(){
-    MatrixGraph grafobanana(3);
-    grafobanana.;
+    int cases, vertexes, edges, a, b, num_conex;
+    scanf("%d",&cases);
+    for (int i = 0; i < cases; i++)
+    {
+        scanf("%d %d",&vertexes,&edges);
+        MatrixGraph grafo(vertexes);
+        for (int i = 0; i < vertexes; i++)
+        {
+            scanf("%d %d",&a,&b);
+            grafo.setEdge(a,b,1);
+            grafo.setEdge(b,a,1);
+
+        }
+        cout << grafo.graphTraverseBFS();
+    }
+    
     return 0;
 }
+
+//g++ teste.cpp -o teste.exe ;Get-Content inputteste.txt | ./teste.exe
