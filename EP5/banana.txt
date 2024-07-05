@@ -1,0 +1,4 @@
+ve ev
+min altura relativa
+mark tbm tem que armazenar altura relativa
+fazer struct
