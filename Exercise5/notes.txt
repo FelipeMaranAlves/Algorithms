@@ -1,0 +1,3 @@
+Detecção de Ciclos: Se houver um ciclo no grafo (ou seja, se uma tarefa depende de si mesma, direta ou indiretamente), não será possível completar todas as tarefas. O algoritmo deve ser capaz de detectar ciclos e, se encontrado um, relatar que não é possível completar todas as tarefas.
+Múltiplas Soluções: Em alguns casos, pode haver mais de uma ordem válida de execução das tarefas. O algoritmo deve ser capaz de encontrar uma ordem válida.
+Grafo Direcionado: As dependências formam um grafo direcionado. A ordenação topológica só faz sentido em grafos direcionados acíclicos (DAGs).

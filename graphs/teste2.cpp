@@ -1,5 +1,4 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 #define VISITED 1
@@ -12,7 +11,7 @@ private:
     vector<int> mark;
 
 public:
-    AdjListGraph(int n) : numVertex(n), adjList(n, vector<int>(1, 1)), mark(n, UNVISITED) {}
+    AdjListGraph(int n) : numVertex(n), adjList(n), mark(n, UNVISITED) {}
 
     void addEdge(int u, int v) {
         adjList[u].push_back(v);
@@ -63,21 +62,43 @@ public:
         }
         return count;
     }
+
+    void printEdges() {
+        for (int i = 0; i < numVertex; i++) {
+            cout << "Vertex " << i << ":";
+            for (int j : adjList[i]) {
+                cout << " " << j;
+            }
+            cout << endl;
+        }
+    }
 };
 
+
+
 int main() {
-    int cases, vertexes, edges, u, v;
-    cin >> cases;
-    for (int i = 0; i < cases; i++) {
-        cin >> vertexes >> edges;
-        AdjListGraph grafo(vertexes);
-        for (int j = 0; j < edges; j++) {
-            cin >> u >> v;
-            grafo.addEdge(u, v);
-        }
-        cout << grafo.graphTraverseBFS() << endl;
-    }
+    AdjListGraph grafo(5);
+    grafo.addEdge(0, 1);
+    grafo.addEdge(0, 2);
+    grafo.addEdge(1, 3);
+    grafo.addEdge(2, 4);
+
+    cout << "Adjacency List:" << endl;
+    grafo.printEdges();
     return 0;
 }
 
 //g++ teste2.cpp -o teste2.exe;Get-Content inputteste.txt | ./teste2.exe
+//g++ teste2.cpp -o teste2.exe; ./teste2.exe
+
+    // int cases, vertexes, edges, u, v;
+    // cin >> cases;
+    // for (int i = 0; i < cases; i++) {
+    //     cin >> vertexes >> edges;
+    //     AdjListGraph grafo(vertexes);
+    //     for (int j = 0; j < edges; j++) {
+    //         cin >> u >> v;
+    //         grafo.addEdge(u, v);
+    //     }
+    //     cout << grafo.graphTraverseBFS() << endl;
+    // }

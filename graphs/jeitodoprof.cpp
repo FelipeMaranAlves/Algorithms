@@ -214,7 +214,6 @@ jeitodoprof::~jeitodoprof()
 
 
 int main(){
-    MatrixGraph grafobanana(3);
-    grafobanana.;
+    
     return 0;
 }
