@@ -1,0 +1,4 @@
+um grafo pode ser visto como a união de um conjunto de vértices e um conjunto de arestas
+conjunto de vértices não pode ser nulo ( pelo menos um nó)
+o conjunto de arestas representa uma relação entre os nós
+feitos usando matrix de adjacência ou usando lista de adjacência
