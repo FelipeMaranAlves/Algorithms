@@ -3,6 +3,7 @@ using namespace std;
 
 #define VISITED 1
 #define UNVISITED 0
+#define INFINITE INT32_MAX
 class Edges
 {
 private:
@@ -32,7 +33,8 @@ private:
     int* Mark; // the array for the representation of states
     list<Edges>* adjList; 
     int numVertex;
-
+    int* Parent_Dijkstra;
+    int* Distances_Dijkstra;
 public:
     GraphList(int n){
         // Mark = (int*)malloc(sizeof(int)*n);
@@ -43,26 +45,17 @@ public:
         for (int i = 0; i < n; ++i) {
             Mark[i] = UNVISITED;
         }
+        Parent_Dijkstra = new int[n];
+        Distances_Dijkstra = new int[n];
     };
     ~GraphList(){
         // free(Mark);
         // free(adjList);
         delete[] Mark;
         delete[] adjList;
+        delete[] Parent_Dijkstra;
+        delete[] Distances_Dijkstra;
     };
-
-    int first(int v){
-        if (adjList[v].empty()) {return numVertex;};
-        return adjList[v].front().GetChild(); //esse cara
-    }
-
-    int next(int v){
-        for (auto it : adjList[v])//(auto it = adjList[v].begin(); it != adjList[v].end(); ++it) outro jeito
-        {
-            // PAREI AQUI
-        }
-        
-    }
 
     void setEdge(int i, int j,int wt){ //directed
         Edges new_edge(wt,j);
@@ -73,21 +66,74 @@ public:
     }
     int getMark(int v){return Mark[v];}
 
-
-
-    void BFS(int start){
-        queue<int> q;
-        q.push(start);
-        Mark[start] = VISITED;
-        while (/* condition */)
+    int* returnditance(){return Distances_Dijkstra;}
+    
+    void Dijkstra(int s){ // the sizeof D[] is numvertex
+        for (int i = 0; i < numVertex; i++)
         {
-            /* code */
+            Distances_Dijkstra[i] = INFINITE;
+            Parent_Dijkstra[i] = -1;
+            Mark[i] = UNVISITED;
         }
-        
+        priority_queue<
+            pair<int, pair<int, int>>,
+            vector<pair<int, pair<int, int>>>,
+            greater<pair<int, pair<int, int>>>
+        >H;
+        H.push({s,{s,0}}); // (predecessor (vertice, distancia))
+        Distances_Dijkstra[s] = 0;
+        int v, p;
+        for (int i = 0; i < numVertex; i++)
+        {
+            do
+            {
+                if (H.empty()) return;
+                auto saida = H.top();
+                H.pop();
+                    p = saida.first;
+                v = saida.second.first;
+            } while (Mark[v] == UNVISITED);
+            Mark[v] == VISITED;
+            Parent_Dijkstra[v] = p;
+            for (auto w : adjList[v])
+            {
+                int wc = w.GetChild();
+                int ww = w.GetWeight();
+                if(Mark[wc] != VISITED && (Distances_Dijkstra[wc] > Distances_Dijkstra[v] + ww)){
+                    Distances_Dijkstra[wc] = Distances_Dijkstra[v] + ww;
+                    H.push({v,{wc,Distances_Dijkstra[wc]}});
+                }
+            }     
+        }
     }
-    // void BFS(int start);
-    // void graphTraverse();
-    // void clearGraph();
+    //toposort fazer dnv se precisar
+    // void clearGraph(); ele se deleta?
     
 };
 
+//A = 0, B = 1, C = 2, D = 3, E = 4
+int main(){
+    const int A = 0;
+    const int B = 1;
+    const int C = 2;
+    const int D = 3;
+    const int E = 4;
+    GraphList grafo(5);
+    grafo.setEdge(A,B,10);
+    grafo.setEdge(A,D,20);
+    grafo.setEdge(A,C,3);
+    grafo.setEdge(B,D,5);
+    grafo.setEdge(C,B,2);
+    grafo.setEdge(C,E,15);
+    grafo.setEdge(D,E,11);
+    grafo.Dijkstra(A);
+    int* distances = grafo.returnditance();
+    for (int i = 0; i < 5; i++)
+    {
+        cout << distances[i] << " ";
+    }
+    
+    return 0;
+}
+
+//g++ anotherone.cpp -o anotherone.exe ; ./anotherone.exe

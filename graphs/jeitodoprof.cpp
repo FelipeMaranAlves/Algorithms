@@ -195,23 +195,6 @@ public:
 
 };
 
-class jeitodoprof
-{
-private:
-    /* data */
-public:
-    jeitodoprof(/* args */);
-    ~jeitodoprof();
-};
-
-jeitodoprof::jeitodoprof(/* args */)
-{
-}
-
-jeitodoprof::~jeitodoprof()
-{
-}
-
 
 int main(){
     
