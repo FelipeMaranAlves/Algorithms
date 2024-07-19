@@ -61,12 +61,17 @@ int main(){
     grafoteste.unionQF(4-1,5-1);
     grafoteste.unionQF(1-1,2-1);
     grafoteste.unionQF(3-1,6-1);
-    grafoteste.unionQF(1-1,3-1);
     for (auto it : grafoteste.returngivenset(1))
     {
         cout << it+1 << " ";
     }
     cout << endl;
+    for (auto it : grafoteste.returngivenset(6-1))
+    {
+         cout << it+1 << " ";
+    }
+    grafoteste.unionQF(1-1,3-1);
+
     return 0;
 }
 

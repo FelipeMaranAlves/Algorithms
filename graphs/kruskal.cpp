@@ -15,18 +15,38 @@ public:
     int GetChild(){return child;}
 };
 
+class setQU
+{
+private:
+    int* treeArr; // parent pointing tree
+public:
+    int returnParent(int current){return treeArr[current];}
+    setQU(int n){
+        treeArr = new int[n];
+        for (int i = 0; i < n; i++)
+        {
+            treeArr[i] = -1;
+        }
+        
+    }
+    ~setQU(){
+        delete[] treeArr;
+    }
 
-// class Vertex
-// {
-// private:
-//     int state;
-//     //possibly a name (if the name is a string i could store the hash function that generates the index of it's position in the Mark array(wich now is an overall storage for information))
-// public:
-//     Vertex(int vis){ state = vis;}
-//     void setState(int a){state = a;}
-// };
-
-
+    int findQU(int curr){
+        if (treeArr[curr] == -1){return curr;} // -1 represents "NULL"
+        treeArr[curr] = findQU(treeArr[curr]);
+        return treeArr[curr];
+    }
+    void unionQU(int a,int b){
+        int rt1 = findQU(a);
+        int rt2 = findQU(b);
+        if (rt1 != rt2)
+        {
+            treeArr[rt2] = treeArr[rt1];
+        }
+    }
+};
 
 class GraphList
 {
@@ -50,8 +70,6 @@ public:
         D = new int[n];
     };
     ~GraphList(){
-        // free(Mark);
-        // free(adjList);
         delete[] Mark;
         delete[] adjList;
         delete[] P;
@@ -69,47 +87,47 @@ public:
 
     int* returnditance(){return D;}
     
-    void Dijkstra(int s){ // the sizeof D[] is numvertex
-        for (int i = 0; i < numVertex; i++)
-        {
-            D[i] = INFINITE;
-            P[i] = -1;
-            Mark[i] = UNVISITED;
-        }
+    GraphList kruskal(){
+        int edgecnt = 1;
+        int totalwt = 0;
         priority_queue<
-            pair<int, pair<int, int>>,
-            vector<pair<int, pair<int, int>>>,
-            greater<pair<int, pair<int, int>>>
+        pair<int, pair<int, int>>,
+        vector<pair<int, pair<int, int>>>,
+        greater<pair<int, pair<int, int>>>
         >H;
-        H.push({s,{s,0}}); // (predecessor (vertice, distancia))
-        D[s] = 0;
-        int v, p;
+        GraphList G(numVertex);
+        setQU ds(numVertex);
         for (int i = 0; i < numVertex; i++)
         {
-            do
-            {
-                if (H.empty()) return;
-                auto saida = H.top();
-                H.pop();
-                    p = saida.first;
-                v = saida.second.first;
-            } while (Mark[v] == VISITED);
-            Mark[v] == VISITED;
-            P[v] = p;
-            for (auto w : adjList[v])
-            {
-                int wc = w.GetChild();
-                int ww = w.GetWeight();
-                if(Mark[wc] != VISITED && (D[wc] > D[v] + ww)){
-                    D[wc] = D[v] + ww;
-                    H.push({v,{wc,D[wc]}});
-                }
-            }     
+            for (auto w : adjList[i])
+            { 
+                H.push({i,{w.GetChild(),w.GetWeight()}});
+                edgecnt++;
+            }
         }
+        int numMST = numVertex;
+        while (numMST > 1)
+        {
+            if (H.empty())
+            {
+                //intead of returning the state here i would rather check in the main if it has infinite distance 
+                return;
+            }
+            pair<int, pair<int, int>> top = H.top();
+            H.pop();
+            int v = top.first;
+            int u = top.second.first;
+            int wt = top.second.second;
+            if (ds.findQU(v) != ds.findQU(u))
+            {
+                totalwt += wt;
+                ds.unionQU(v,u);
+                G.setEdge(v,u,wt);
+                numMST--;
+            }
+        }
+        return G;
     }
-    //toposort fazer dnv se precisar
-    // void clearGraph(); ele se deleta?
-    
 };
 
 //A = 0, B = 1, C = 2, D = 3, E = 4
@@ -127,12 +145,7 @@ int main(){
     grafo.setEdge(C,B,2);
     grafo.setEdge(C,E,15);
     grafo.setEdge(D,E,11);
-    grafo.Dijkstra(A);
-    int* distances = grafo.returnditance();
-    for (int i = 0; i < 5; i++)
-    {
-        cout << distances[i] << " ";
-    }
+    GraphList newgraph = grafo.kruskal();
     
     return 0;
 }
