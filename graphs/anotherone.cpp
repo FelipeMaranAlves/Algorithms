@@ -15,6 +15,7 @@ public:
     int GetChild(){return child;}
 };
 
+
 // class Vertex
 // {
 // private:
@@ -92,7 +93,7 @@ public:
                 H.pop();
                     p = saida.first;
                 v = saida.second.first;
-            } while (Mark[v] == UNVISITED);
+            } while (Mark[v] == VISITED);
             Mark[v] == VISITED;
             Parent_Dijkstra[v] = p;
             for (auto w : adjList[v])
