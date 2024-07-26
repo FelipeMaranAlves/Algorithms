@@ -17,6 +17,17 @@ public:
 
 
 
+// class Vertex
+// {
+// private:
+//     int state;
+//     //possibly a name (if the name is a string i could store the hash function that generates the index of it's position in the Mark array(wich now is an overall storage for information))
+// public:
+//     Vertex(int vis){ state = vis;}
+//     void setState(int a){state = a;}
+// };
+
+
 
 class GraphList
 {
@@ -24,8 +35,8 @@ private:
     int* Mark; // the array for the representation of states
     list<Edges>* adjList; 
     int numVertex;
-    int* P;
-    int* D;
+    int* Parent_Dijkstra;
+    int* Distances_Dijkstra;
 public:
     GraphList(int n){
         // Mark = (int*)malloc(sizeof(int)*n);
@@ -36,16 +47,16 @@ public:
         for (int i = 0; i < n; ++i) {
             Mark[i] = UNVISITED;
         }
-        P = new int[n];
-        D = new int[n];
+        Parent_Dijkstra = new int[n];
+        Distances_Dijkstra = new int[n];
     };
     ~GraphList(){
         // free(Mark);
         // free(adjList);
         delete[] Mark;
         delete[] adjList;
-        delete[] P;
-        delete[] D;
+        delete[] Parent_Dijkstra;
+        delete[] Distances_Dijkstra;
     };
 
     void setEdge(int i, int j,int wt){ //directed
@@ -57,13 +68,13 @@ public:
     }
     int getMark(int v){return Mark[v];}
 
-    int* returnditance(){return D;}
+    int* returnditance(){return Distances_Dijkstra;}
     
     void Dijkstra(int s){ // the sizeof D[] is numvertex
         for (int i = 0; i < numVertex; i++)
         {
-            D[i] = INFINITE;
-            P[i] = -1;
+            Distances_Dijkstra[i] = INFINITE;
+            Parent_Dijkstra[i] = -1;
             Mark[i] = UNVISITED;
         }
         priority_queue<
@@ -72,7 +83,7 @@ public:
             greater<pair<int, pair<int, int>>>
         >H;
         H.push({s,{s,0}}); // (predecessor (vertice, distancia))
-        D[s] = 0;
+        Distances_Dijkstra[s] = 0;
         int v, p;
         for (int i = 0; i < numVertex; i++)
         {
@@ -85,14 +96,14 @@ public:
                 v = saida.second.first;
             } while (Mark[v] == VISITED);
             Mark[v] == VISITED;
-            P[v] = p;
+            Parent_Dijkstra[v] = p;
             for (auto w : adjList[v])
             {
                 int wc = w.GetChild();
                 int ww = w.GetWeight();
-                if(Mark[wc] != VISITED && (D[wc] > D[v] + ww)){
-                    D[wc] = D[v] + ww;
-                    H.push({v,{wc,D[wc]}});
+                if(Mark[wc] != VISITED && (Distances_Dijkstra[wc] > Distances_Dijkstra[v] + ww)){
+                    Distances_Dijkstra[wc] = Distances_Dijkstra[v] + ww;
+                    H.push({v,{wc,Distances_Dijkstra[wc]}});
                 }
             }     
         }
@@ -127,4 +138,4 @@ int main(){
     return 0;
 }
 
-//g++ anotherone.cpp -o anotherone.exe ; ./anotherone.exe
+//g++ dijkstra.cpp -o dijkstra.exe ; ./dijkstra.exe
