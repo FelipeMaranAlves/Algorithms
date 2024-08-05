@@ -1,13 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+/*
+Node
+create node
+Stack
+create stack
+push
+pop
+size
+*/
 struct Node
 {
     int value;
     Node* next;
 
-    Node(int a){
-        value = a;
+    Node(int valor){
+        value = valor;
         next = NULL;
     }
 };
@@ -30,7 +38,7 @@ struct Stack
     }
 
     int pop(){
-        if (top == NULL) {throw exception();}
+        if (top == NULL) {return;}
         int temp = top->value;
         top = top->next;
         size--;
@@ -41,11 +49,3 @@ struct Stack
         return size;
     }
 };
-
-int main(){
-    Stack s;
-    s.push(1);
-    cout << s.pop() << endl;
-    s.pop();
-}
-//stack2.cpp

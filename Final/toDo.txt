@@ -1,0 +1,3 @@
+fazer dfs recursivo
+fazer dfs nao recursivo
+fazer pelo menos um quicksort e um kruskal
