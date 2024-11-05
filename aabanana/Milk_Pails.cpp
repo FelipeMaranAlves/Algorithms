@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int main(){
@@ -8,20 +9,14 @@ int main(){
     int x, y ,z;
     int biggest,a ,b, current;
     fin >> x >> y >> z;
-    a = z/x;
-    b =0;
     biggest = 0;
-    current = (x*a+y*b);
-    while (b < (z/y)) {
-        if (current > biggest) {
-            biggest = current;
+    for (int i=0; x*i <= z; i++) {
+        for (int j=0; y*j <= z-(x*i); j++) {
+            current = (x*i+y*j);
+            if (current > biggest) {
+                biggest = current;
+            }
         }
-        a--;
-        current = (x*a+y*b);
-        if (z-current > y) {
-            b++;
-        }
-        current = (x*a+y*b);
     }
     fout << biggest;
     return 0;
