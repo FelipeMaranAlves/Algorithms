@@ -10,28 +10,32 @@ int main(){
     bool controle2 = true;
     bool controle1 = true;
     int entrada, resposta;
-    int errocount = 0;
+    int errocount = 3;
    while (controle1)
    {
-     while (controle2)
+    if (errocount == 3)
     {
-        resposta = rand();
-        if (0 < resposta && resposta < 16)
+        while (controle2)
         {
-            controle2 = false;
+            resposta = rand();
+            if (0 < resposta && resposta < 16)
+            {
+                controle2 = false;
+            }
         }
+        errocount = 0;
     }
-    
+    cout << "bota algo: ";
     cin >> entrada;
 
     if (entrada == resposta)
     {
-        cout << "yay";
+        cout << "yay" << endl;
     } else if (entrada == -1){
         controle1 = false;
-        cout << "fim";
+        cout << "fim" << endl;
     } else {
-        cout << "errou";
+        cout << "errou" << endl;
         errocount++;
     }
    }
