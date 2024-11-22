@@ -1,19 +1,53 @@
 #include <iostream>
-#include <iomanip>
-
 using namespace std;
 
-int main(){
-    for (int i = 1; i <= 10; i++)
-    {
-        int a = i;
-        for (int j = 1; j <= 10; j++)
-        {
-            cout << setw(3) << a << " ";
-            a += i;
-        }
-        cout << endl;
+template <typename E>
+class AList
+{
+private:
+    int max;
+    int used;
+    int cursor;
+    E* adress;
+public:
+    AList(int max = 10){
+        used = 0;
+        cursor = 0;
+        adress = new E[max]
     }
+    ~AList() {delete [] adress;}
+
+    Upsize(){
+        max *= 2;
+        E* temp = new E[max];
+        int i = 0;
+        for (E item:adress)
+        {
+            temp[i] = item
+            i++;
+        }
+        adress = temp;
+        delete [] temp;
+    }
+
+    Downsize(){//might cause some issues with memory cuz idk if the for each will stop when there are no more items to be read
+        max = (max/2);
+        E* temp = new E[max];
+        int i = 0;
+        for (E item:adress)
+        {
+            temp[i] = item
+            i++;
+        }
+        adress = temp;
+        delete [] temp;
+    }
+
     
+};
+
+
+int main(){
+
     return 0;
 }

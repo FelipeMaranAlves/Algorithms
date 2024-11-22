@@ -11,8 +11,8 @@ int main(){
     bool controle1 = true;
     int entrada, resposta;
     int errocount = 3;
-   while (controle1)
-   {
+    while (controle1)
+    {
     if (errocount == 3)
     {
         while (controle2)
@@ -24,6 +24,7 @@ int main(){
             }
         }
         errocount = 0;
+        cout << "resposta gerada, ";
     }
     cout << "bota algo: ";
     cin >> entrada;
@@ -36,11 +37,15 @@ int main(){
         cout << "fim" << endl;
     } else {
         cout << "errou" << endl;
+        if (entrada > resposta)
+        {
+            cout << "menor" << endl;
+        } else {
+            cout << "maior" << endl;
+        }
         errocount++;
     }
-   }
-   
-    
+    }
     return 0;
 }
 
