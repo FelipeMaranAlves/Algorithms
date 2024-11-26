@@ -28,7 +28,7 @@ public:
         {
             temp[i] = adress[i];
         }
-        adress = temp;
+        this->adress = temp;
         delete [] temp;
     }
 
@@ -51,7 +51,7 @@ public:
     }
     
     void insert(E item){ //cursor has it's position 0->(max-1)
-        // if (used == max) {this->Upsize();} 
+        if (used == max) {this->Upsize();} 
         for (int i = used; i > cursor ; i--) //[a,-,-] -> [b,a,-]
         {
             adress[i]= adress[i-1];
@@ -142,22 +142,18 @@ int main(){
     //     }
     // }
 
-    lista.insert(2);
-    lista.insert(5);
-    lista.insert(2);
     lista.insert(1);
-    fout << lista.find(2) << endl;
+    lista.insert(2);
+    lista.insert(3);
+    lista.insert(4);
+    lista.insert(5);
+    lista.insert(6);
+    lista.insert(7);
+    lista.insert(8);
+    lista.insert(9);
+    lista.insert(10);
     lista.print();
-    lista.cursorMoveTo(lista.getCursorPosition()+1);
-    lista.remove();
-    fout << lista.find(2) << endl;
-    lista.remove();
-    fout << lista.find(5) << endl;
-    lista.print();
-    lista.cursorMoveTo(lista.getCursorPosition()+1);
-    lista.cursorMoveTo(lista.getCursorPosition()+1);
-    lista.remove();
-    fout << lista.find(1) << endl;
+    lista.insert(99);
     lista.print();
     return 0;
 }
