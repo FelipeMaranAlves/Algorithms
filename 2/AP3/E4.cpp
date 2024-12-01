@@ -28,7 +28,7 @@ public:
         {
             temp[i] = adress[i];
         }
-        adress = temp;
+        this->adress = temp;
         delete [] temp;
     }
 
@@ -64,15 +64,12 @@ public:
     }
     
     void insert(E item){ //cursor has it's position 0->(max-1)
-        if (used == max) {this->Upsize();} // [a,a,a,a,a] -> [a,a,a,a,a,-,-,-,-,-]
-        // this->print();      
+        if (used == max) {this->Upsize();} 
         for (int i = used; i > cursor ; i--) //[a,-,-] -> [b,a,-]
         {
             adress[i]= adress[i-1];
-            // this->print();
         }
         adress[cursor] = item;
-        // this->print();
         used++;
     }
 
@@ -81,7 +78,7 @@ public:
         {
             adress[i]= adress[i+1];
         }
-        if (used == (max/2)-1) {this->Downsize();} // [a,a,a,a,-,-,-,-,-,-] -> [a,a,a,a,-]
+        // if (used == (max/2)-1) {this->Downsize();}
         used--;
     }
 
@@ -91,7 +88,7 @@ public:
 
     void cursorMoveTo(int index){ //idk if I should limit the cursor to just "used" or "max", this way is easier for me if it's all left alined
         if (index > -1 && index <= used) {cursor = index;}
-        else {cerr << "index out of range";}
+        else {cerr << "index out of range" << endl;}
     }
 
     int getUsed(){
@@ -132,30 +129,44 @@ int main(){
     ifstream fin("input");
     ofstream fout("output");
     AList<int> lista;
-    int entradaInt, c, n;
-    string entradaString;
-    fin >> c;
-    for (int i = 0; i < c; i++)//casos de mecher em lista
-    {
-        fout << "Caso " << c+1 << ":" << endl;
-        AList<int> lista;
-        fin >> n;
-        for (int i = 0; i < n; i++)//operacoes na lista
-        {
-            fin >> entradaString >> entradaInt; 
-        }
-        if (entradaString == "insert")
-        {
-            lista.insert(entradaInt);
-        } else if (entradaString == "remove") {
-            lista.remove();
-        } else if (entradaString == "count") {
-            fout << lista.find(entradaInt) << endl;
-        } else if (entradaString == "prev") {
-            lista.cursorMoveTo(lista.getCursorPosition()-1);
-        } else if (entradaString == "next") {
-            lista.cursorMoveTo(lista.getCursorPosition()+1);
-        }
-    }
+    // int entradaInt, c, n;
+    // string entradaString;
+    // fin >> c;
+    // for (int i = 0; i < c; i++)//casos de mecher em lista
+    // {
+    //     fout << "Caso " << c+1 << ":" << endl;
+    //     AList<int> lista;
+    //     fin >> n;
+    //     for (int i = 0; i < n; i++)//operacoes na lista
+    //     {
+    //         fin >> entradaString >> entradaInt; 
+    //     }
+    //     if (entradaString == "insert")
+    //     {
+    //         lista.insert(entradaInt);
+    //     } else if (entradaString == "remove") {
+    //         lista.remove();
+    //     } else if (entradaString == "count") {
+    //         fout << lista.find(entradaInt) << endl;
+    //     } else if (entradaString == "prev") {
+    //         lista.cursorMoveTo(lista.getCursorPosition()-1);
+    //     } else if (entradaString == "next") {
+    //         lista.cursorMoveTo(lista.getCursorPosition()+1);
+    //     }
+    // }
+
+    lista.insert(1);
+    lista.insert(2);
+    lista.insert(3);
+    lista.insert(4);
+    lista.insert(5);
+    lista.insert(6);
+    lista.insert(7);
+    lista.insert(8);
+    lista.insert(9);
+    lista.insert(10);
+    lista.print();
+    lista.insert(99);
+    lista.print();
     return 0;
 }
