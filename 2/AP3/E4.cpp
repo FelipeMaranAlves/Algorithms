@@ -32,6 +32,19 @@ public:
         delete [] temp;
     }
 
+    /*
+    void Upsize(){ //used = max
+        max *= 2;
+        E* temp = this->adress;
+        this->adress = new E[max];
+        for (int i = 0; i < max/2; i++)
+        {
+            adress[i] = temp[i];
+        }
+        delete [] temp;
+    }
+    */
+
     void Downsize(){//might cause some issues with memory cuz idk if the for each will stop when there are no more items to be read
         max = (max/2);
         E* temp = new E[max];
