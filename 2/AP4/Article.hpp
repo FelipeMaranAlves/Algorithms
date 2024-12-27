@@ -14,6 +14,8 @@ public:
     Article(long int, string,double);
     ~Article();
     void print();
+    int getCount(void);
+    Article(const Article &original);
     
     void set_number(long int a){
         this->article_number = a;
@@ -38,8 +40,6 @@ public:
     string get_name(void){
         return this->article_name;
     }
-
-    void print();
 };
 
 #endif
