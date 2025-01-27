@@ -39,16 +39,11 @@ class prePackedFood : public product
 private:
     float unitprice;
 public:
-prePackedFood(){
-        setCode(-1);
-        setName("null");
-        unitprice = -1;
-        }
-    prePackedFood(long code, string name, long uprice){
-        setCode(code);
-        setName(name);
-        unitprice = uprice;
-        }
+    prePackedFood() : unitprice(-1)
+    {}
+    prePackedFood(long code, string name, long uprice) 
+    : product(code,name) , unitprice(uprice)
+    {}
     ~prePackedFood() = default;
 
     void setUnitPrice(long a){unitprice = a;}
@@ -76,16 +71,11 @@ private:
     double kiloprice;
     double weight;
 public:
-    freshfood(){
-        setCode(-1);
-        setName("null");
-        kiloprice = -1;
-        }
-    freshfood(long a, string b, double c){
-        setCode(a);
-        setName(b);
-        kiloprice = c;
-        }
+    freshfood(): kiloprice(-1), weight(-2)
+    {}
+    freshfood(long a, string b, double c, double d)
+    : product(a,b), kiloprice(c), weight(d)
+    {}
     void setKiloPrice(long a){kiloprice = a;}
     long getKiloPrice(void){return kiloprice;}
     void setWeight(double a){weight =a;}
@@ -113,41 +103,21 @@ public:
 };
 
 
-
+product& isLowerCode(product& a,product& b){
+    if (a.getCode() < b.getCode()){
+        return a;}
+    return b;
+}
 
 int main(){
-    product produto1(001,"coca");
-    freshfood produto2(002,"banana",2);
-    prePackedFood produto3(003,"requeijao",9);
-    produto1.printer();
-    produto2.printer();
-    produto3.printer();
-    fout << "================================";
-    product produto4;
-    freshfood produto5;
-    prePackedFood produto6;
-    produto4.scanner();
-    produto5.scanner();
-    produto6.scanner();
-    produto4.printer();
-    produto5.printer();
-    produto6.printer();
-    fout << "================================";
-    fout << "code do 4 era"<< produto4.getCode();
-    cout << "o codigo do 4 ";
-    produto4.setCode(cin.get());
-    fout << "code do 4 agora e"<< produto4.getCode() << endl;
-    fout << "name do 5 era"<< produto5.getName();
-    cout << "o name do 5 ";
-    char temp[21];
-    cin.getline(temp,21);
-    produto5.setName(temp);
-    fout << "nome do 5 agora e"<< produto4.getName() << endl;
-    fout<< "o preco unitario do 6 era: " << produto6.getUnitPrice()<<endl;
-    fout << "unitprice do 6 ";
-    produto6.setCode(cin.get());
-    fout<< "o preco unitario do 6 agora e : " << produto6.getUnitPrice()<<endl;
-    fout << "================================";
+    product* array[3];
+    array[0] = new product(1,"tire");
+    array[1] = new freshfood(2,"banana",2,0.76);
+    array[2] = new prePackedFood(3,"tuna",4.8);
+    static_cast<freshfood*> (array[0]);
+    freshfood* produto4 = new freshfood(4,"banana prata",3,0.6);
+    for (int i = 0; i < 3; i++) {array[i]->printer();}
+    produto4->printer();
     return 0;
 }
 
