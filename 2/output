@@ -2,10 +2,10 @@ Bar code: 1
 Name: tire
 Bar code: 2
 Name: banana
+Price per kilo: 2
+Weight: 0.76
+Total price: 1.52
 Bar code: 3
 Name: tuna
-Bar code: 4
-Name: banana prata
-Price per kilo: 3
-Weight: 0.6
-Total price: 1.8
+Price per unit: 4
+Total price: 12

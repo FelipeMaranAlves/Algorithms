@@ -37,26 +37,33 @@ public:
 class prePackedFood : public product
 {
 private:
+    double units;
     float unitprice;
 public:
-    prePackedFood() : unitprice(-1)
+    prePackedFood() : unitprice(-1), units(-1)
     {}
-    prePackedFood(long code, string name, long uprice) 
-    : product(code,name) , unitprice(uprice)
+    prePackedFood(long code, string name, long uprice,long nUnits) 
+    : product(code,name) , unitprice(uprice), units(nUnits)
     {}
     ~prePackedFood() = default;
 
     void setUnitPrice(long a){unitprice = a;}
     long getUnitPrice(void){return unitprice;}
+    void setNumberOfUnits(long a) {units = a;}
+    long getnUnits(void) {return units;}
     void scanner(){ //wtf, i do what im told tho...
         product::scanner();
         cout << "Input the price per unit: ";
         cin >> unitprice;
         cout << endl;
+        cout << "Input the number of units: ";
+        cin >> units;
+        cout << endl;
     }
     void printer(){
         product::printer();
         fout << "Price per unit: " << unitprice << endl;
+        fout << "Total price: " << unitprice * units;
     }
     // double banana(long units){
     // double price = units*unitprice;
@@ -113,11 +120,12 @@ int main(){
     product* array[3];
     array[0] = new product(1,"tire");
     array[1] = new freshfood(2,"banana",2,0.76);
-    array[2] = new prePackedFood(3,"tuna",4.8);
-    static_cast<freshfood*> (array[0]);
-    freshfood* produto4 = new freshfood(4,"banana prata",3,0.6);
-    for (int i = 0; i < 3; i++) {array[i]->printer();}
-    produto4->printer();
+    array[2] = new prePackedFood(3,"tuna",4.8,3);
+    array[0]->printer();
+    static_cast<freshfood*> (array[1])->printer();
+    static_cast<prePackedFood*> (array[2])->printer();
+    freshfood* ptrFf = new freshfood(4,"adulterinho",500,2.8);
+    static_cast<product*> (ptfFf)->printer();
     return 0;
 }
 
