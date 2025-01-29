@@ -1,7 +1,8 @@
 #ifndef FRACTION
 #define FRACTION
 #include <iostream>
-
+#include <cstdlib>
+using namespace std;
 
 class Fraction
 {
@@ -9,31 +10,21 @@ private:
     long numerator;
     long denominator;
 public:
-    // ~Fraction();
 
-    Fraction(long a = 0, long b = 1){
-        if (b == 0)
-        {
-            throw "nuh uh";
-            
-        }
+    class DivisionByZero
+    {};
+
+    Fraction(long a = 0,long b =1) throw(DivisionByZero)ç
+    Fraction(long a = 0, long b = 1) {
+        if (b == 0){throw "nuh uh";}
+        
         if (b < 0){a = -a;b = -b;}
         this->numerator = a;
         this->denominator = b;
     }
 
-    Fraction(int a, int b){
-        if (b == 0)
-        {
-            throw "nuh uh";
-            
-        }
-        if (b < 0){a = -a;b = -b;}
-        this->numerator = a;
-        this->denominator = b;
-    }
-
-    // double to_double() const{ meu jeito feio
+    ~Fraction() = default;
+    // double to_double() const{// meu jeito feio
     //     return ((double)this->numerator)/((double)this->denominator);
     // }
     

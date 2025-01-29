@@ -63,7 +63,7 @@ public:
     void printer(){
         product::printer();
         fout << "Price per unit: " << unitprice << endl;
-        fout << "Total price: " << unitprice * units;
+        fout << "Total price: " << unitprice * units << endl;
     }
     // double banana(long units){
     // double price = units*unitprice;
@@ -116,16 +116,18 @@ product& isLowerCode(product& a,product& b){
     return b;
 }
 
+product* isLowerCode(product* a,product* b){
+    if (a->getCode() < b->getCode()){
+        return a;}
+    return b;
+}
+
 int main(){
     product* array[3];
     array[0] = new product(1,"tire");
     array[1] = new freshfood(2,"banana",2,0.76);
     array[2] = new prePackedFood(3,"tuna",4.8,3);
-    array[0]->printer();
-    static_cast<freshfood*> (array[1])->printer();
-    static_cast<prePackedFood*> (array[2])->printer();
-    freshfood* ptrFf = new freshfood(4,"adulterinho",500,2.8);
-    static_cast<product*> (ptfFf)->printer();
+    isLowerCode(array[2],array[2])->printer();
     return 0;
 }
 

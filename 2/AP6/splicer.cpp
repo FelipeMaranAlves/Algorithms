@@ -10,17 +10,14 @@ int* splicer(int* a1, int sizea1, int* a2, int sizea2, int position){
     // SEM MALLOC int *v = new int[len1+len2];
     int j = 0;
     for (int i = 0;i <= position; i++){ //inseri position elementos de a1
-        temp[i] = a1[i];
-    }
+        temp[i] = a1[i];}
     for (int i = position+1;i <= (sizea2+position); i++){ //inseri sizea2 todo
         temp[i] = a2[j];
-        j++;
-    }
+        j++;}
     j = position+1;
     for (int i = sizea2+position+1;i < sizea1+sizea2; i++){//inserindo o resto de a1 depois de a2
         temp[i] = a1[j];
-        j++;
-    }
+        j++;}
     return temp;
 }
 
